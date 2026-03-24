@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyQuest — Game-Powered Learning</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body data-theme="roblox">
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-emoji">🎮</span>
+        <div>
+          <span class="logo-name">StudyQuest</span>
+          <span class="logo-sub">Game-Powered Learning</span>
+        </div>
+      </div>
+      <span class="badge">BETA</span>
+    </div>
+  </header>
+
+  <div class="app">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="card-title">
+          <span>⚙️</span><span>Setup Your Mission</span>
+        </div>
+
+        <div class="field">
+          <label class="label">🔑 OpenAI API Key</label>
+          <div class="input-row">
+            <input id="apiKey" type="password" class="input" placeholder="sk-proj-...">
+            <button id="toggleKey" class="icon-btn" title="Toggle visibility">👁️</button>
+          </div>
+          <span class="hint">Stored locally in your browser · <a href="https://platform.openai.com/api-keys" target="_blank">Get a key →</a></span>
+        </div>
+
+        <div class="field">
+          <label class="label">🎮 Choose Your Game</label>
+          <div class="game-row">
+            <button class="game-btn active" data-game="roblox">
+              <span class="game-icon roblox">R</span>
+              <span class="game-label">Roblox</span>
+              <span class="game-sub">Obbies &amp; Robux</span>
+            </button>
+            <button class="game-btn" data-game="cod">
+              <span class="game-icon cod">⚔️</span>
+              <span class="game-label">Call of Duty</span>
+              <span class="game-sub">Loadouts &amp; Streaks</span>
+            </button>
+            <button class="game-btn" data-game="r6s">
+              <span class="game-icon r6s">🛡️</span>
+              <span class="game-label">Rainbow Six</span>
+              <span class="game-sub">Operators &amp; Intel</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">📚 Paste Your Study Notes</label>
+          <textarea id="studyInput" class="textarea"
+            placeholder="Paste your study material here...
+
+Example: The mitochondria is the powerhouse of the cell. It produces ATP through a process called cellular respiration using oxygen and glucose..."></textarea>
+          <span class="counter" id="charCount">0 characters</span>
+        </div>
+
+        <button id="transformBtn" class="transform-btn">
+          <span id="btnText">⚡ TRANSFORM TO GAME LANGUAGE!</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- OUTPUT AREA -->
+    <main class="output-area">
+      <div class="card output-card">
+        <div class="card-title">
+          <span id="outputIcon">🎯</span>
+          <span id="outputTitle">Mission Briefing</span>
+          <div class="card-actions">
+            <button id="copyBtn" class="icon-btn hidden">📋 Copy</button>
+          </div>
+        </div>
+
+        <!-- Idle -->
+        <div id="stateIdle" class="state state-idle">
+          <div class="idle-pulse">
+            <span class="idle-icon">🎮</span>
+          </div>
+          <h2>Ready to Play?</h2>
+          <p>Paste your study notes on the left, pick your game, then hit Transform!</p>
+          <div class="subject-grid">
+            <span class="subject-chip">📖 Biology</span>
+            <span class="subject-chip">📐 Math</span>
+            <span class="subject-chip">🌍 History</span>
+            <span class="subject-chip">⚗️ Chemistry</span>
+            <span class="subject-chip">💻 Coding</span>
+            <span class="subject-chip">✍️ English</span>
+            <span class="subject-chip">🔭 Physics</span>
+            <span class="subject-chip">🧠 Any Subject!</span>
+          </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="stateLoading" class="state state-loading hidden">
+          <div class="loading-bars">
+            <div class="lb"></div>
+            <div class="lb"></div>
+            <div class="lb"></div>
+            <div class="lb"></div>
+            <div class="lb"></div>
+          </div>
+          <p id="loadingMsg" class="loading-msg">Loading mission intel...</p>
+          <p class="loading-sub">Translating your notes into game language...</p>
+        </div>
+
+        <!-- Result -->
+        <div id="stateResult" class="state state-result hidden">
+          <div id="resultContent" class="result"></div>
+        </div>
+
+        <!-- Error -->
+        <div id="stateError" class="state state-error hidden">
+          <span class="error-icon">⚠️</span>
+          <h3>Mission Failed!</h3>
+          <p id="errorMsg">Something went wrong. Check your API key and try again.</p>
+          <button id="retryBtn" class="retry-btn">🔄 Retry Mission</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="statsBar" class="stats-bar hidden">
+        <span>📝 <strong id="statWords">0</strong> words analysed</span>
+        <span>⚡ <strong id="statTime">0</strong>s generation</span>
+        <span>🎮 <strong id="statGame">Roblox</strong> style</span>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>StudyQuest · Turn the study grind into game wins · Made for gamers who learn 🎮</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
